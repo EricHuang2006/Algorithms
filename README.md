@@ -1,3 +1,4 @@
 # Algorithms
-Here I keep track of some competitive programming algorithms that I've learned.
-Data Structure
+#Data Structure
+## Persistent Segment Tree
+## Dsu with rollback
