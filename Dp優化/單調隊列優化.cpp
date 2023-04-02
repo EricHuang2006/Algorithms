@@ -1,4 +1,5 @@
 //Problem source: Codeforces E. The Fair Nut and Rectangles
+//Learned from: https://codeforces.com/blog/entry/63823
 #include<bits/stdc++.h>
 using namespace std;
 typedef long long ll;
