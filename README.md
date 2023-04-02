@@ -18,7 +18,7 @@
 ## Graphs
 ### [匈牙利演算法(二分圖最大匹配)](https://github.com/EricHuang2006/Algorithms/blob/main/Graphs/%E5%8C%88%E7%89%99%E5%88%A9%E6%BC%94%E7%AE%97%E6%B3%95%20For%20Maximum%20Bipartite%20Matching.cpp)
 ## Dp 優化
-
+### [斜率優化](https://github.com/EricHuang2006/Algorithms/blob/main/Dp%E5%84%AA%E5%8C%96/%E6%96%9C%E7%8E%87%E5%84%AA%E5%8C%96(Convex%20Hull%20Trick).cpp)
 ## Mathematics
 
 ## Game Theory
