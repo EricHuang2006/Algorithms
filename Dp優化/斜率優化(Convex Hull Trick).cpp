@@ -25,6 +25,7 @@ bool line::flag = true;
 
 class ConvexHullMax {
 	set<line> convex;
+	public:
 	void insertline(ll m, ll k){
 		line now = line(m, k);
 		if(convex.empty()){
