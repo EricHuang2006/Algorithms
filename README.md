@@ -3,7 +3,7 @@
 ## Data Structure
 ### Persistent Segment Tree
 ### [時間線段樹 + Dsu with rollback](https://github.com/EricHuang2006/Algorithms/blob/main/Data%20Structure/%E6%99%82%E9%96%93%E7%B7%9A%E6%AE%B5%E6%A8%B9%20%2B%20Dsu%20with%20Rollback.cpp)
-
+### [李超線段樹](https://github.com/EricHuang2006/Algorithms/tree/main/Data%20Structure)
 ## String Algorithms
 ### [KMP](https://github.com/EricHuang2006/Algorithms/blob/main/String%20Algorithms/KMP.cpp)
 ### [Z's Algorithm](https://github.com/EricHuang2006/Algorithms/blob/main/String%20Algorithms/Z%20Algorithm.cpp)
