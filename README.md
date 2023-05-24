@@ -2,6 +2,9 @@
 
 ## Data Structure
 ### Persistent Segment Tree
+### [Heavy Light Decomposition](https://github.com/EricHuang2006/Algorithms/blob/main/Data%20Structure/Heavy-Light%20Decomposition.cpp)
+### [Centroid Decomposition](https://github.com/EricHuang2006/Algorithms/blob/main/Data%20Structure/Centroid%20Decomposition.cpp)
+### [動態開點](https://github.com/EricHuang2006/Algorithms/blob/main/Data%20Structure/%E5%8B%95%E6%85%8B%E9%96%8B%E9%BB%9E.cpp)
 ### [時間線段樹 + Dsu with rollback](https://github.com/EricHuang2006/Algorithms/blob/main/Data%20Structure/%E6%99%82%E9%96%93%E7%B7%9A%E6%AE%B5%E6%A8%B9%20%2B%20Dsu%20with%20Rollback.cpp)
 ### [李超線段樹](https://github.com/EricHuang2006/Algorithms/blob/main/Data%20Structure/%E6%9D%8E%E8%B6%85%E7%B7%9A%E6%AE%B5%E6%A8%B9.cpp)
 ## String Algorithms
