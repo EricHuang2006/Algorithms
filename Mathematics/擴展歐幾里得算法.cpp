@@ -22,6 +22,7 @@ ll extgcd(ll a, ll b, ll &x, ll &y){
 	y -= (a / b) * x;
 	return y;
 }
+
 //迭代法 ： 利用矩陣轉移
 /*
 |x1 x2|     transition : |0      1   |
