@@ -24,7 +24,8 @@
 ### [單調隊列優化](https://github.com/EricHuang2006/Algorithms/blob/main/Dp%E5%84%AA%E5%8C%96/%E5%96%AE%E8%AA%BF%E9%9A%8A%E5%88%97%E5%84%AA%E5%8C%96.cpp)
 ### [斜率優化](https://github.com/EricHuang2006/Algorithms/blob/main/Dp%E5%84%AA%E5%8C%96/%E6%96%9C%E7%8E%87%E5%84%AA%E5%8C%96(Convex%20Hull%20Trick).cpp)
 ## Mathematics
-
+### [擴展歐幾里得算法](https://github.com/EricHuang2006/Algorithms/blob/main/Mathematics/%E6%93%B4%E5%B1%95%E6%AD%90%E5%B9%BE%E9%87%8C%E5%BE%97%E7%AE%97%E6%B3%95.cpp)
+### [中國剩餘定理](https://github.com/EricHuang2006/Algorithms/blob/main/Mathematics/%E4%B8%AD%E5%9C%8B%E5%89%A9%E9%A4%98%E5%AE%9A%E7%90%86(CRT).cpp)
 ## Game Theory
 
 ## Flows and Cuts
