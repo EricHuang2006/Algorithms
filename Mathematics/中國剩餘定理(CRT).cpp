@@ -34,7 +34,7 @@ ll CRT(vector<ll> p, vector<ll> a){
 	for(int i = 0; i < n; i++){
 		x[i] = a[i];
 		for(int j = 0; j < i; j++){
-			x[i] = ((x[i] - x[j]) * r[j][i] % p[i] + p[i]) % p[i]; // 主要運算過程
+			x[i] = ((x[i] - x[j]) * r[j][i] % p[i] + p[i]) % p[i]; // 主要算式
 		}
 	}
 	ll prod = 1, ret = 0;
