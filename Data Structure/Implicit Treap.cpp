@@ -1,6 +1,7 @@
 /*
 	* Date: 2023-07-09
 	* Implicit Treap: throw away the keys
+	* The only part that differs from the original treap is the split function
 */
 #include<bits/stdc++.h>
 using namespace std;
