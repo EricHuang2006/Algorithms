@@ -25,20 +25,24 @@ void split(node *&t, int x, node *&l, node *&r){
 	if(t->val <= x){
 		split(t->r, x, t->r, r);
 		l = t;
+		l->recalc();
 	}
 	else{
 		split(t->l, x, l, t->l);
 		r = t;
+		r->recalc();
 	}
 }
 node* merge(node *a, node *b){ //requirement : all keys in a are less than all keys in b
 	if(!a || !b) return a ? a : b;
 	if(a->pri > b->pri){
 		a->r = merge(a->r, b);
+		a->recalc();
 		return a;
 	}
 	else{
 		b->l = merge(l, b->l);
+		b->recalc();
 		return b;
 	}
 }
