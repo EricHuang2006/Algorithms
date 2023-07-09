@@ -1,3 +1,7 @@
+/*
+	* Date: 2023-07-09
+	* Implicit Treap: throw away the keys
+*/
 #include<bits/stdc++.h>
 using namespace std;
 
