@@ -41,7 +41,7 @@ node* merge(node *a, node *b){ //requirement : all keys in a are less than all k
 		return a;
 	}
 	else{
-		b->l = merge(l, b->l);
+		b->l = merge(a, b->l);
 		b->recalc();
 		return b;
 	}
@@ -53,7 +53,7 @@ node* insert(node *t, int k){
 	return merge(merge(a, new node(k)), b);
 }
 
-node remove(node *t, int k){
+node* remove(node *t, int k){
 	node *a, *b, *c;
 	split(t, k - 1, a, b);
 	split(b, k, b, c);
