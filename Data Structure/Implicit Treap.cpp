@@ -18,22 +18,23 @@ int cnt(node *t){
 void node::recalc(){
 	c = cnt(l) + cnt(r) + 1;
 }
-void split(node *&t, node *&l, node *&r, int val){ 
+pair<node*, node*> split(node *t, int val){
 	if(!t){
-		l = r = nullptr;
-		return;
+		return {nullptr, nullptr};
 	}
 	if(cnt(t->l) < val){
-		split(t->r, t->r, r, val - cnt(t->l) - 1);
-		l = t;
+		auto p = split(t->r, val - cnt(t->l) - 1);
+		t->r = p.first;
+		t->recalc();
+		return {t, p.second};
 	}
 	else{
-		split(t->l, l, t->l, val);
-		r = t;
+		auto p = split(t->l, val);
+		t->l = p.second;
+		t->recalc();
+		return {p.first, t};
 	}
-	t->recalc();
 }
-
 node* merge(node *a, node *b){ //requirement : all keys in a are less than all keys in b
 	if(!a || !b) return a ? a : b;
 	if(a->pri > b->pri){
