@@ -38,10 +38,12 @@ node* merge(node *a, node *b){ //requirement : all keys in a are less than all k
 	if(!a || !b) return a ? a : b;
 	if(a->pri > b->pri){
 		a->r = merge(a->r, b);
+		a->recalc();
 		return a;
 	}
 	else{
 		b->l = merge(a, b->l);
+		b->recalc();
 		return b;
 	}
 }
