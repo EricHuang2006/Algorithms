@@ -57,6 +57,5 @@ node remove(node *t, int k){
 }
 
 int main(void){
-	fastio;
 
 }
