@@ -57,7 +57,7 @@ namespace AC{
 		}
 	}
  
-	int qry(string &s){ // return number of maximum occurence of a string in s
+	int qry(string &s){ // return number of maximum number of occurences of a string in s
 		int u = 0, ret = 0;
 		for(int i = 0; i < s.size(); i++){
 			u = ch[u][s[i] - 'a'];
