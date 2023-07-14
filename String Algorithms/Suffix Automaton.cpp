@@ -1,3 +1,8 @@
+/*
+	* Date: 2023/07/14
+ 	* Suffix Automaton
+  	* Description: all paths in the suffix automaton from starting point corresponds to a substring of the original string
+*/
 #include<bits/stdc++.h>
 using namespace std;
 typedef long long ll;
