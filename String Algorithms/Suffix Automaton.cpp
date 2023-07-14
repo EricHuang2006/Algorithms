@@ -1,85 +1,92 @@
 #include<bits/stdc++.h>
 using namespace std;
- 
- 
-struct state{
-    int len, link, cnt;
-    map<char, int> next; // transitions
+typedef long long ll;
+#define fastio ios::sync_with_stdio(false), cin.tie(0)
+#define pb push_back
+const int maxn = 2e5 + 5;
+
+struct SuffixAutomaton{
+	int len[maxn], link[maxn]; // maxn >= 2 * n - 1
+	ll cnt[maxn]; // size of endpos in a endpos-equivalent class
+	map<char, int> nxt[maxn];
+	int sz = 1, last = 0;
+	void init(string s){
+		link[0] = -1;
+		for(auto x : s) sa_extend(x);
+	}
+	void sa_extend(char c){
+		int cur = sz++;
+		len[cur] = len[last] + 1;
+		int p = last;
+		while(p != -1 && !nxt[p].count(c)){
+			nxt[p][c] = cur;
+			p = link[p];
+		}
+		if(p == -1) link[cur] = 0;
+		else{
+			int q = nxt[p][c];
+			if(len[q] == len[p] + 1) link[cur] = q;
+			else{
+				int clone = sz++;
+				len[clone] = len[p] + 1;
+				nxt[clone] = nxt[q];
+				link[clone] = link[q];
+				while(p != -1 && nxt[p][c] == q) {
+					nxt[p][c] = clone;
+					p = link[p];
+				}
+				link[cur] = link[q] = clone;
+			}
+		}
+		last = cur;
+	}
+	ll getDistinct(int pos){ // number of distinct substrings starting at pos, including an empty string
+		if(distinct[pos]) return distinct[pos];
+		distinct[pos] = 1;
+		for(auto [c, next] : nxt[pos]) distinct[pos] += getDistinct(next);
+		return cnt[pos];
+	}
+	ll numDistinct(){
+		return getDistinct(0) - 1; // excluding an empty string
+	}
+	ll numDistinct2(){
+		ll tot = 0;
+		for(int i = 1; i < sz; i++) tot += len[i] - len[link[i]];
+		return tot;
+	}
+	string distinct_kth(ll k){
+		numDistinct();
+		string s;
+		ll cur = 0, tally = 0;
+		while(tally < k){
+			for(auto [c, next] : nxt[cur]){
+				if(tally + distinct[next] >= k){
+					tally += 1;
+					s += c;
+					cur = next;
+					break;
+				}
+				tally += distinct[next];
+			}
+		}
+		return s;
+	}
 };
- 
-const int maxn = 1e5 + 5;
-state st[maxn * 2];
-int sz, last;
- 
-void sa_init(){
-    st[0].len = 0;
-    st[0].link = -1;
-    sz++;
-    last = 0;
-}
- 
-void sa_extend(char c){
-    int cur = sz++;
-    st[cur].cnt = 1;
-    st[cur].len = st[last].len + 1;
-    int p = last;
-    while(p != -1 && !st[p].next.count(c)){
-        st[p].next[c] = cur;
-        p = st[p].link;
-    }
-    if(p == -1){
-        st[cur].link = 0;
-    }
-    else{
-        int q = st[p].next[c];
-        if(st[p].len + 1 == st[q].len){
-            st[cur].link = q;
-        }
-        else{
-            int clone = sz++;
-            st[clone].len = st[p].len + 1;
-            st[clone].next = st[q].next;
-            st[clone].link = st[q].link;
-            while(p != -1 && st[p].next[c] == q){
-                st[p].next[c] = clone;
-                p = st[p].link;
-            }
-            st[q].link = st[cur].link = clone;
-        }
-    }
-    last = cur;
-}
- 
-void sa_updcnt(){
-    vector<int> states_by_len[sz];
-    for(int i = 0; i < sz; i++) states_by_len[st[i].len].push_back(i);
-    for(int i = sz - 1; i >= 0; i--){
-        for(auto u : states_by_len[i]){
-            if(st[u].link != -1) st[st[u].link].cnt += st[u].cnt;
-        }
-    }
-}
- 
-int sa_qry(string s){
-    int now = 0;
-    for(int i = 0; i < s.size(); i++){
-        if(!st[now].next.count(s[i])) return 0;
-        now = st[now].next[s[i]];
-    }
-    return st[now].cnt;
+SuffixAutomaton automata;
+
+void solve(){
+	string s;
+	cin>>s;
+	ll k;
+	cin>>k;
+	automata.init(s);
+	cout<<automata.qry_kth(k)<<"\n";
 }
 int main(void){
- 
-    string s;
-    cin>>s;
-    int t;
-    cin>>t;
-    sa_init();
-    for(int i = 0; i < s.size(); i++) sa_extend(s[i]);
-    sa_updcnt();
-    while(t--){
-        string temp;
-        cin>>temp;
-        cout<<sa_qry(temp)<<endl;
-    }
+	fastio;
+	int t = 1;
+	// cin>>t;
+	while(t--){
+		solve();
+	}
 }
