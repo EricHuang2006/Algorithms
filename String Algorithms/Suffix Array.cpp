@@ -35,7 +35,6 @@ struct SuffixArray{
 			m = p + 1;
 		}
 	}
-
 	int rk[maxn], lcp[maxn];
 	void GetLCP(){ // Kasai's Algo 
 		int n = s.size(), val = 0;
@@ -50,25 +49,14 @@ struct SuffixArray{
 			}
 		}
 	}
-	void print(){
-		int n = s.size();
-		cout<<s<<"\n";
-		cout<<"Suffix Array : ";
-		for(int i = 0; i < n; i++) cout<<sa[i]<<" ";
-		cout<<"\n         Lcp : ";
-		for(int i = 0; i < n; i++) cout<<lcp[i]<<" ";
-		cout<<"\n";
-	}
-}
-
+};
+SuffixArray SA;
 int main(){
 	int n;
 	cin>>n;
-    cin>>s;
-    GetSA();
-    GetLCP();
-    //print();
-    //ll n = s.length();
-    //for(int i = 0; i < n; i++) cout<<sa[i]<<endl;
-    cout<<*max_element(lcp, lcp + s.size());
+	string s;
+	cin>>s;
+    	SA.init(s);
+	for(int i = 0; i < n; i++) cout<<SA.sa[i]<<" ";
+	cout<<"\n";
 }
