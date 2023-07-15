@@ -12,7 +12,7 @@ const int maxn = 2e5 + 5;
 
 struct SuffixAutomaton{
 	int len[maxn], link[maxn]; // maxn >= 2 * n - 1
-	ll cnt[maxn]; // size of endpos in a endpos-equivalent class
+	int cnt[maxn], distinct[maxn];
 	map<char, int> nxt[maxn];
 	int sz = 1, last = 0;
 	void init(string s){
