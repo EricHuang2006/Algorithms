@@ -15,7 +15,7 @@ struct SuffixAutomaton{
 	int cnt[maxn], distinct[maxn];
 	bool is_clone[maxn];
    	int first_pos[maxn];
-   	vector<int> inv_link; //suffix references
+   	vector<int> inv_link[maxn]; //suffix references
 	map<char, int> nxt[maxn];
 	int sz = 1, last = 0;
 	void init(string s){
