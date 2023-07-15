@@ -13,6 +13,9 @@ const int maxn = 2e5 + 5;
 struct SuffixAutomaton{
 	int len[maxn], link[maxn]; // maxn >= 2 * n - 1
 	int cnt[maxn], distinct[maxn];
+	bool is_clone[maxn];
+   	int first_pos[maxn];
+   	vector<int> inv_link; //suffix references
 	map<char, int> nxt[maxn];
 	int sz = 1, last = 0;
 	void init(string s){
@@ -22,6 +25,7 @@ struct SuffixAutomaton{
 	void sa_extend(char c){
 		int cur = sz++;
 		len[cur] = len[last] + 1;
+		firstpos[cur] = len[cur] - 1;
 		int p = last;
 		while(p != -1 && !nxt[p].count(c)){
 			nxt[p][c] = cur;
@@ -33,6 +37,8 @@ struct SuffixAutomaton{
 			if(len[q] == len[p] + 1) link[cur] = q;
 			else{
 				int clone = sz++;
+				is_clone[clone] = true;
+				firstpos[clone] = q;
 				len[clone] = len[p] + 1;
 				nxt[clone] = nxt[q];
 				link[clone] = link[q];
@@ -45,6 +51,7 @@ struct SuffixAutomaton{
 		}
 		last = cur;
 	}
+	//Applications
 	ll getDistinct(int pos){ // number of distinct substrings starting at pos, including an empty string
 		if(distinct[pos]) return distinct[pos];
 		distinct[pos] = 1;
@@ -75,6 +82,29 @@ struct SuffixAutomaton{
 			}
 		}
 		return s;
+	}
+	//inverse links
+	void genLink(){
+	    for(int i = 1; i < sz; i++){
+	       st[st[v].link].inv.pb(v);
+	    }
+	}
+	
+	void get_all_occur(vector<int>& oc, int v){
+	    if(!st[v].is_clone) oc.pb(st[v].first_pos);
+	    for(auto u : st[v].inv_link) get_all_occur(oc, u);
+	}
+	vector<int> all_occ(string s){ // get all occurrences of s in automaton
+	    int cur = 0;
+	    for(auto x : s){
+	        if(!st[cur].next.count(x)) return {};
+	        cur = st[cur].next[x];
+	    }
+	    vector<int> oc;
+	    get_all_occur(oc, cur);
+	    for(auto &x : oc) x += 1 - s.length(); //translate to starting positions
+	    sort(oc.begin(), oc.end());
+	    return oc;
 	}
 };
 SuffixAutomaton automata;
