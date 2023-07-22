@@ -1,3 +1,8 @@
+/*
+	* FFT
+ 	* Date: 2023/07/22
+  	* Description: multiply two polynomials in O(nlogn)
+*/
 #include<bits/stdc++.h>
 using namespace std;
 
@@ -54,5 +59,4 @@ int main(){
 	auto v = multiply(a, b);
 	for(auto x : v) cout<<x<<" ";
 	cout<<"\n";
-
 }
