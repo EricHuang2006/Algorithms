@@ -35,7 +35,7 @@ void fft(vector<cd> &a, bool invert = 0){
 void fft(vector<cd> &a, bool invert = 0){ // interative version
 	int n = a.size();
 	int lg_n = __lg(n);
-	for(int i = 1, j = 0; i < n; i++){ //fbit-reversal permutation
+	for(int i = 1, j = 0; i < n; i++){ //bit-reversal permutation
 		int bit = n >> 1;
 		for(; j & bit; bit >>= 1) j ^= bit;
 		j ^= bit;
