@@ -32,6 +32,28 @@ void fft(vector<cd> &a, bool invert = 0){
 	} 
 }
 
+void fft(vector<cd> &a, bool invert = 0){ // interative version
+	int n = a.size();
+	int lg_n = __lg(n);
+	for(int i = 0; i < n; i++){ //bit-reversal permutation
+		if(i < reverse(i, lg_n)) swap(a[i], a[reverse(i, lg_n)]);
+	}
+	for(int len = 2; len <= n; len++){
+		double ang = 2 * PI / len * (invert? -1 : 1);
+		cd wlen(cos(ang), sin(ang));
+		for(int i = 0; i < n; i += len){
+			cd w(1);
+			for(int j = 0; j < len / 2; j++){
+				cd u = a[i + j], v = a[i + j + len / 2] * w;
+				a[i + j] = u + v;
+				a[i + j + len / 2] = u - v;
+				w *= wlen;
+			}
+		}
+	}
+	if(invert) for(auto &x : a) x /= n;
+}
+
 vector<int> multiply(vector<int> const& a, vector<int> const& b){
 	vector<cd> fa(a.begin(), a.end()), fb(b.begin(), b.end());
 	int n = 1;
