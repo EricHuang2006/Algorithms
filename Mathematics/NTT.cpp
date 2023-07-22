@@ -66,6 +66,7 @@ vector<int> multiply(vector<ll> const& a, vector<ll> const& b){
 	return result;
 }
 int main(){
+	fastio;
 	int n, m;
 	cin>>n>>m;
 	vector<ll> a(n), b(m);
