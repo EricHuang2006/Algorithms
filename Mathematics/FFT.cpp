@@ -38,7 +38,7 @@ void fft(vector<cd> &a, bool invert = 0){ // interative version
 	for(int i = 0; i < n; i++){ //bit-reversal permutation
 		if(i < reverse(i, lg_n)) swap(a[i], a[reverse(i, lg_n)]);
 	}
-	for(int len = 2; len <= n; len++){
+	for(int len = 2; len <= n; len <<= 1){
 		double ang = 2 * PI / len * (invert? -1 : 1);
 		cd wlen(cos(ang), sin(ang));
 		for(int i = 0; i < n; i += len){
