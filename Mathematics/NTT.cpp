@@ -2,7 +2,7 @@
   * NTT
   * Date: 2023/07/23
   * Description: calculate polynomial multiplication module a prime in O(nlogn)
-  * Verfication: Yosupo Library Checker - Convolution: https://judge.yosupo.jp/submission/151758
+  * Verfication: Library Checker - Convolution: https://judge.yosupo.jp/submission/151758
 */
 #include<bits/stdc++.h>
 using namespace std;
