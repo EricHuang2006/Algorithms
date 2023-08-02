@@ -2,7 +2,7 @@
   * Miller_Rabin Primiality Test
   * Created : 2023/08/02
   * Check for primality of a number in O(log^3n) 
-  * For n < 2^64, we can use a = {2, 3, 5, 7, 11,13,17, 19, 23, 29, 31, 37}
+  * For n < 2^64, we can use a = {2, 3, 5, 7, 11,13,17, 19, 23, 29, 31, 37} for a deterministic version
 */
 #include<bits/stdc++.h>
 using namespace std;
