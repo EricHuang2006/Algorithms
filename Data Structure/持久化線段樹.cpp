@@ -1,3 +1,8 @@
+/*
+	* Persistent Segment Tree
+ 	* Created: 2023/08/11
+  	* Qualification: CSES - Range Queries and Copies
+*/
 #include<bits/stdc++.h>
 using namespace std;
 typedef long long ll;
