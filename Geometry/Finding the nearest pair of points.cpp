@@ -10,14 +10,14 @@ typedef pair<int, int> pll;
 #pragma GCC optimize("Ofast")
 #define pb push_back
 #define eb emplace_back
-const ll INF = 8e18;
+const double INF = 1e20;
 const int N = 998244353;
 const int maxn = 2e5 + 5;
-
+int n;
 struct pt{
-	ll x, y;
+	double x, y;
 	pt(){}
-	pt(ll _x, ll _y) : x(_x), y(_y) {}
+	pt(double _x, double _y) : x(_x), y(_y) {}
 };
 pt a[maxn], tmp[maxn];
 struct cmp_x{
@@ -36,16 +36,16 @@ pt operator - (pt a, pt b){
 ll len(pt a){
 	return sqrt(a.x * a.x + a.y * a.y);
 }
-ll len2(pt a){
+double len2(pt a){
 	return a.x * a.x + a.y * a.y;
 }
 ostream &operator << (ostream &s, pt &p){
 	s << p.x << " " << p.y;
 	return s;
 }
-ll mn_dist = INF;
+double mn_dist = INF;
 void upd_ans(pt a, pt b){
-	ll dist = (a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y);
+	double dist = sqrt((a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y));
 	mn_dist = min(mn_dist, dist);
 }
 
@@ -69,9 +69,8 @@ void solve(int l, int r){
  
 	int sz = 0;
 	for(int i = l; i < r; i++){
-		if((a[i].x - midx) * (a[i].x - midx) < mn_dist){
-			int cur = 0;
-			for(int j = sz - 1; j >= 0 && (a[i].y - tmp[j].y) * (a[i].y - tmp[j].y) < mn_dist; j--){
+		if(abs(a[i].x - midx) < mn_dist){
+			for(int j = sz - 1; j >= 0 && a[i].y - tmp[j].y < mn_dist; j--){
 				upd_ans(a[i], tmp[j]);
 			}
 			tmp[sz++] = a[i];
@@ -79,24 +78,21 @@ void solve(int l, int r){
 	}
 }
 void solve(){
-	int n;
-	cin >> n;
 	mn_dist = INF;
 	for(int i = 0; i < n; i++) {
-		ll x, y;
+		double x, y;
 		cin>>x>>y;
 		a[i] = pt(x, y);
 	}
 	sort(a, a + n, cmp_x());
 	solve(0, n);
-	cout<<mn_dist<<"\n";
-	// cout<<fixed<<setprecision(6)<<sqrt(mn_dist)<<"\n";
+	// cout<<mn_dist<<"\n";
+	cout<<fixed<<setprecision(6)<<mn_dist<<"\n";
 }
 
 int main(void){
 	fastio;	
-	int t = 1;
-	while(t--){
+	while(cin >> n){
 		solve();
 	}
 }
