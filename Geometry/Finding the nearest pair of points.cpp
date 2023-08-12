@@ -1,3 +1,7 @@
+/*
+	* Date: 2023/08/12
+	* Finding d^2, where d is the distance of the nearest pair of points
+*/
 #include<bits/stdc++.h>
 using namespace std;
 typedef long long ll;
@@ -10,7 +14,7 @@ const ll INF = 8e18;
 const int N = 998244353;
 const int maxn = 2e5 + 5;
 int n;
-
+int mxop = 0;
 struct pt{
 	ll x, y;
 	pt(){}
@@ -36,11 +40,16 @@ ll len(pt a){
 ll len2(pt a){
 	return a.x * a.x + a.y * a.y;
 }
+ostream &operator << (ostream &s, pt &p){
+	s << p.x << " " << p.y;
+	return s;
+}
 ll mn_dist = INF;
 void upd_ans(pt a, pt b){
 	ll dist = (a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y);
 	mn_dist = min(mn_dist, dist);
 }
+
 void solve(int l, int r){
 	if(r - l <= 3){
 		for(int i = l; i < r; i++){
@@ -58,21 +67,22 @@ void solve(int l, int r){
 
 	merge(a + l, a + m, a + m, a + r, tmp, cmp_y());
 	copy(tmp, tmp + r - l, a + l);
-
+ 
 	int sz = 0;
 	for(int i = l; i < r; i++){
-		if(abs(a[i].x - midx) < mn_dist){
-			for(int j = sz - 1; j >= 0 && a[i].y - tmp[j].y < mn_dist; j--){
+		if((a[i].x - midx) * (a[i].x - midx) < mn_dist){
+			int cur = 0;
+			for(int j = sz - 1; j >= 0 && (a[i].y - tmp[j].y) * (a[i].y - tmp[j].y) < mn_dist; j--){
 				upd_ans(a[i], tmp[j]);
 			}
 			tmp[sz++] = a[i];
 		}
 	}
 }
-int main(void){
-	fastio;
-	cin>>n;
-	auto st = clock();
+void solve(){
+	int n;
+	cin >> n;
+	mn_dist = INF;
 	for(int i = 0; i < n; i++) {
 		ll x, y;
 		cin>>x>>y;
@@ -81,4 +91,13 @@ int main(void){
 	sort(a, a + n, cmp_x());
 	solve(0, n);
 	cout<<mn_dist<<"\n";
+	// cout<<fixed<<setprecision(6)<<sqrt(mn_dist)<<"\n";
+}
+
+int main(void){
+	fastio;	
+	int t = 1;
+	while(t--){
+		solve();
+	}
 }
