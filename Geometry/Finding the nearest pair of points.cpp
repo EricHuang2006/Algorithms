@@ -1,6 +1,6 @@
 /*
 	* Date: 2023/08/12
-	* Finding d^2, where d is the distance of the nearest pair of points
+	* Finding the distance of the nearest pair of points
 */
 #include<bits/stdc++.h>
 using namespace std;
