@@ -13,8 +13,7 @@ typedef pair<int, int> pll;
 const ll INF = 8e18;
 const int N = 998244353;
 const int maxn = 2e5 + 5;
-int n;
-int mxop = 0;
+
 struct pt{
 	ll x, y;
 	pt(){}
