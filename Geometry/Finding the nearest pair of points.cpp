@@ -1,79 +1,84 @@
 #include<bits/stdc++.h>
 using namespace std;
+typedef long long ll;
+typedef pair<int, int> pll;
+#define fastio ios::sync_with_stdio(false), cin.tie(0)
+#pragma GCC optimize("Ofast")
+#define pb push_back
+#define eb emplace_back
+const ll INF = 8e18;
+const int N = 998244353;
+const int maxn = 2e5 + 5;
+int n;
 
 struct pt{
-	int x, y, id;
-	pt(int x = 0, int y = 0, int idx = 0) : x(x), y(y), id(idx){}	
+	ll x, y;
+	pt(){}
+	pt(ll _x, ll _y) : x(_x), y(_y) {}
 };
-
+pt a[maxn], tmp[maxn];
 struct cmp_x{
-	bool operator() (const pt & a, const pt & b) const{
+	bool operator()(const pt& a, const pt& b) const{
 		return a.x < b.x || (a.x == b.x && a.y < b.y);
 	}
 };
-
 struct cmp_y{
-	bool operator()(const pt & a, const pt & b) const{
+	bool operator()(const pt& a, const pt& b) const{
 		return a.y < b.y;
 	}
 };
-
-int n;
-vector<pt> a;	
-
-double mindist;
-pair<int, int> best_pair;
-
-void upd_ans(const pt & a, const pt & b){
-	double dist = sqrt((a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y));
-	if(dist < mindist){
-		mindist = dist;
-		best_pair = {a.id, b.id};
-	}
+pt operator - (pt a, pt b){
+	return pt(a.x - b.x, a.y - b.y);
 }
-
-vector<pt> t;
-
-void rec(int l, int r){
+ll len(pt a){
+	return sqrt(a.x * a.x + a.y * a.y);
+}
+ll len2(pt a){
+	return a.x * a.x + a.y * a.y;
+}
+ll mn_dist = INF;
+void upd_ans(pt a, pt b){
+	ll dist = (a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y);
+	mn_dist = min(mn_dist, dist);
+}
+void solve(int l, int r){
 	if(r - l <= 3){
 		for(int i = l; i < r; i++){
 			for(int j = i + 1; j < r; j++){
 				upd_ans(a[i], a[j]);
 			}
 		}
-		sort(a.begin() + l, a.begin() + r, cmp_y());
+		sort(a + l, a + r, cmp_y());
 		return;
-	}	
-	int m = (l + r) >> 1;
+	}
+	int m = (l + r) / 2;
 	int midx = a[m].x;
-	rec(l, m);
-	rec(m, r);
-	
-	merge(a.begin() + l, a.begin() + m, a.begin() + m, a.begin() + r, t.begin(), cmp_y());
-	copy(t.begin(), t.begin() + r - l, a.begin() + l);
-	
-	int tsz = 0;
+	solve(l, m);
+	solve(m, r);
+
+	merge(a + l, a + m, a + m, a + r, tmp, cmp_y());
+	copy(tmp, tmp + r - l, a + l);
+
+	int sz = 0;
 	for(int i = l; i < r; i++){
-		if(abs(a[i].x - midx < mindist)){
-			for(int j = tsz - 1; j >= 0 && a[i].y - a[j].y < mindist; j--){
-				upd_ans(a[i], t[j]);
+		if(abs(a[i].x - midx) < mn_dist){
+			for(int j = sz - 1; j >= 0 && a[i].y - tmp[j].y < mn_dist; j--){
+				upd_ans(a[i], tmp[j]);
 			}
-			t[tsz++] = a[i];
+			tmp[sz++] = a[i];
 		}
 	}
 }
-
 int main(void){
-	
+	fastio;
 	cin>>n;
-	a.resize(n);
-	for(int i = 0; i < n; i++){
-		int x, y;
+	auto st = clock();
+	for(int i = 0; i < n; i++) {
+		ll x, y;
 		cin>>x>>y;
-		a[i] = pt(x, y, i);
-	}	
-	t.resize(n);
-	sort(a.begin(), a.end(), cmp_x());
-	mindist = 1E20;
-	rec(0, n);
+		a[i] = pt(x, y);
+	}
+	sort(a, a + n, cmp_x());
+	solve(0, n);
+	cout<<mn_dist<<"\n";
 }
