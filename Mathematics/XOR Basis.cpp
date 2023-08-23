@@ -1,3 +1,7 @@
+/*
+	* Created: 2023/08/23
+ 	* Basic operations using Xor Basis
+*/
 #include<bits/stdc++.h>
 using namespace std;
 #define fastio ios::sync_with_stdio(false), cin.tie(0)
@@ -25,9 +29,9 @@ int find(int x){
 }
 
 int mx(){
-  int mx = 0;
-  for(int i = 29; i >= 0; i--){
-    if((x & (1 << i) == 0 && basis[i]) mx ^= basis[i];
-  }
-  return mx;
+ 	int mx = 0;
+ 	for(int i = 29; i >= 0; i--){
+		if((x & (1 << i) == 0 && basis[i]) mx ^= basis[i];
+  	}
+  	return mx;
 }
