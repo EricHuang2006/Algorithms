@@ -1,7 +1,7 @@
 /*
-  * Created : 2023/08/24
-  * Splay Tree
-  * Qualifications : 洛谷 P3369 【模板】普通平衡树 https://www.luogu.com.cn/problem/P3369
+ 	* Created : 2023/08/24
+ 	* Splay Tree
+ 	* Qualifications : 洛谷 P3369 【模板】普通平衡树 https://www.luogu.com.cn/problem/P3369
 */
 #include<bits/stdc++.h>
 using namespace std;
