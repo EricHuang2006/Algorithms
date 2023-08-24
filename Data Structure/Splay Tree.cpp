@@ -6,21 +6,9 @@
 #include<bits/stdc++.h>
 using namespace std;
 typedef long long ll;
-typedef pair<int, int> pll;
 #define fastio ios::sync_with_stdio(false), cin.tie(0)
-// #pragma GCC optimize("Ofast")
-#define pb push_back
-#define pf push_front
-#define eb emplace_back
-#define f first
-#define s second
-#define all(v) v.begin(), v.end()
-#define lowbit(x) x&-x
 const int maxn = 2e5 + 5;
-const int INF = 1e9;
-const int N = 998244353;
 int rt, tot = 0, par[maxn], ch[maxn][2], val[maxn], cnt[maxn], sz[maxn];
-// splay tree
 
 struct Splay{
 	void maintain(int x) { sz[x] = sz[ch[x][0]] + sz[ch[x][1]] + cnt[x]; }
@@ -29,7 +17,7 @@ struct Splay{
 		ch[x][0] = ch[x][1] = par[x] = val[x] = sz[x] = cnt[x] = 0;
 	}
 
-	void rotate(int x){ // 把x rotate 到原 parent 的位置
+	void rotate(int x){ // 把x向上rotate一個level(zig 或 zag)
 		int y = par[x], z = par[y], chk = get(x);
 		ch[y][chk] = ch[x][chk ^ 1];
 		if(ch[x][chk ^ 1]) par[ch[x][chk ^ 1]] = y; // '夾'在x跟y之間的子樹的parent 從x變成y
@@ -95,6 +83,7 @@ struct Splay{
 			}
 		}
 	}
+
 	int kth(int k){ // 查詢排名k的數
 		int cur = rt;
 		while(true){
@@ -125,6 +114,7 @@ struct Splay{
 		splay(cur);
 		return cur;
 	}
+
 	void del(int k){
 		rk(k);
 		if(cnt[rt] > 1){
