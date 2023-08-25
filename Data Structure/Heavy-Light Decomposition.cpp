@@ -1,4 +1,4 @@
-//CSES - Path Queries II (still haven't AC) https://cses.fi/problemset/result/6105513/
+//CSES - Path Queries II https://cses.fi/problemset/result/6105513/
 #include<bits/stdc++.h>
 using namespace std;
 typedef long long ll;
@@ -8,11 +8,8 @@ typedef long long ll;
 #define pb push_back
 const int maxn = 2e5 + 5;
 int n, q, t = 0;
-int val[maxn], sz[maxn], head[maxn], dep[maxn], st[maxn * 4], par[maxn], loc[maxn];
+int val[maxn], sz[maxn], head[maxn], dep[maxn], st[maxn * 4], par[maxn], loc[maxn], id[maxn];
 vector<int> adj[maxn];
-int op(int a, int b){
-	return max(a, b);
-}
 void upd(int pos, int val, int v = 1, int l = 0, int r = n - 1){
 	if(l == r){
 		st[v] = val;
@@ -21,13 +18,13 @@ void upd(int pos, int val, int v = 1, int l = 0, int r = n - 1){
 	int m = (l + r) / 2;
 	if(pos <= m) upd(pos, val, v * 2, l, m);
 	else upd(pos, val, v * 2 + 1, m + 1, r);
-	st[v] = op(st[v * 2], st[v * 2 + 1]);
+	st[v] = max(st[v * 2], st[v * 2 + 1]);
 }
-ll qry(int l, int r, int v = 1, int L = 0, int R = n - 1){
+int qry(int l, int r, int v = 1, int L = 0, int R = n - 1){
 	if(L > r || R < l) return 0;
 	if(l <= L && r >= R) return st[v];
 	int m = (L + R) / 2;
-	return op(qry(l, r, v * 2, L, m), qry(l, r, v * 2 + 1, m + 1, R));
+	return max(qry(l, r, v * 2, L, m), qry(l, r, v * 2 + 1, m + 1, R));
 }
  
 void dfs(int pos, int prev){
@@ -41,26 +38,38 @@ void dfs(int pos, int prev){
 	}
 }
 void decompose(int pos, int h){
+	id[t] = pos;
 	head[pos] = h, loc[pos] = t++;
-	upd(loc[pos], val[pos]);
+	// upd(loc[pos], val[pos]);
 	for(auto x : adj[pos]){
 		if(x == adj[pos][0]) decompose(x, h);
 		else decompose(x, x);
 	}
 }
+void build_segtree(int v = 1, int l = 0, int r = n - 1){
+	if(l == r){
+		st[v] = val[id[l]];
+		return;
+	}
+	int m = (l + r) / 2;
+	build_segtree(v * 2, l, m);
+	build_segtree(v * 2 + 1, m + 1, r);
+	st[v] = max(st[v * 2], st[v * 2 + 1]);
+}
 void build(){
 	dfs(0, -1);
 	decompose(0, 0);
+	build_segtree();
 }
 int solve(int a, int b){
 	int ret = 0;
 	while(head[a] != head[b]){
 		if(dep[head[a]] > dep[head[b]]) swap(a, b);
-		ret = op(ret, qry(loc[head[b]], loc[b]));
+		ret = max(ret, qry(loc[head[b]], loc[b]));
 		b = par[head[b]];
 	}
 	if(dep[a] > dep[b]) swap(a, b);
-	return op(ret, qry(loc[a], loc[b])); 
+	return max(ret, qry(loc[a], loc[b])); 
 }
 int main(void){
 	ios::sync_with_stdio(false);
