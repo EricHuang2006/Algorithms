@@ -61,7 +61,7 @@ struct Splay{
 			}
 			add[x] = 0;
 		}
-		if(rev[x]){
+		if(rev[x]){ // 標懶標時兒子已經翻轉了，兒子的兒子沒有
 			if(ls) rev[ls] ^= 1, swap(ch[ls][0], ch[ls][1]);
 			if(rs) rev[rs] ^= 1, swap(ch[rs][0], ch[rs][1]);
 			rev[x] = 0;
