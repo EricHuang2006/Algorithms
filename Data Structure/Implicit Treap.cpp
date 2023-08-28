@@ -49,16 +49,14 @@ node* merge(node *a, node *b){ //requirement : all keys in a are less than all k
 	}
 }
 
-node* insert(node *t, int k){
-	node *a, *b;
-	split(t, a, b, k);
+node *insert(node *t, int k){
+	auto [a, b] = split(t, k);
 	return merge(merge(a, new node(k)), b);
 }
 
 node* remove(node *t, int k){
-	node *a, *b, *c;
-	split(t, a, b, k - 1);
-	split(b, b, c, k);
+	auto [a, b] = split(t, k - 1);
+	auto [b, c] = split(b, k);
 	return merge(a, c);
 }
 
