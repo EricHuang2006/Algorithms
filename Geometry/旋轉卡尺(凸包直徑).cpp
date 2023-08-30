@@ -1,6 +1,6 @@
 /*
 	* Created: 2023/08/30
-	* Description: 用選轉卡尺O(n)求凸包直徑
+	* Description: 用旋轉卡尺O(n)求凸包直徑
 	* Qualifications: 洛谷 P1452 [USACO03FALL] Beauty Contest G /【模板】旋转卡壳 https://www.luogu.com.cn/problem/P1452
 */
 #include<bits/stdc++.h>
