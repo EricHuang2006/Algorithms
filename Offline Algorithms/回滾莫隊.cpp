@@ -1,6 +1,7 @@
 /*
   	* 回滾莫隊 : CF - F. Souvenirs https://codeforces.com/contest/765/problem/F
  	* Created : 2023/09/02
+  	* 想法：當加入和刪除只有一種操作好做時，就只做一種操作，剩下交給回滾解決
 	* Description :
                           7 continue
                         --------->
