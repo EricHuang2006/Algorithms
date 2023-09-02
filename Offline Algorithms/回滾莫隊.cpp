@@ -3,19 +3,19 @@
  	* Created : 2023/09/02
   	* 想法：當加入和刪除只有一種操作好做時，就只做一種操作，剩下交給回滾解決
 	* Description :
-                          7 continue
-                        --------->
-   	 6 (roll_back all)
+                                  7 continue
+                              --------->
+   	  6 (roll_back all)
   	<----
          	 5 (roll_back to query range, 算貢獻)
 	      <------
-   	4 (delete)
+             4 (delete)
   	----------->
-                	3 (roll_back to query range)
+                	 3 (roll_back to query range)
                      --------> 
-                            	2 (delete)
+                            	      2 (delete)
               	      <---------------------------------
-                          1 (create entire list)
+                           1 (create entire list)
   	<---------------------------------------------->
   	|-----*------|--------*-------------------------    | | = block range, * * = query range
    
