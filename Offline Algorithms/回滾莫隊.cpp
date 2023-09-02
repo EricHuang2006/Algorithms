@@ -1,22 +1,24 @@
 /*
-  * 回滾莫隊 : CF - F. Souvenirs https://codeforces.com/contest/765/problem/F
-  * Created : 2023/09/02
-  * Description :
+  	* 回滾莫隊 : CF - F. Souvenirs https://codeforces.com/contest/765/problem/F
+ 	* Created : 2023/09/02
+	* Description :
                           7 continue
                         --------->
-    6 (roll_back all)
-  <----
-          5 (roll_back to query)
-        <------
-   4 (delete)
-  ----------->
-                3 (roll_back to query)
-              --------> 
-                            2 (delete)
-              <-----------------------------------
-                          1
-  <---------------------------------------------->
-  |-----*------|--------*-------------------------    | | = block range, * * = query range
+   	 6 (roll_back all)
+  	<----
+         	 5 (roll_back to query range, 算貢獻)
+	      <------
+   	4 (delete)
+  	----------->
+                	3 (roll_back to query range)
+                     --------> 
+                            	2 (delete)
+              	<-----------------------------------
+                          1 (create entire list)
+  	<---------------------------------------------->
+  	|-----*------|--------*-------------------------    | | = block range, * * = query range
+   
+   	* 做兩次，一次只算 [br, n] 對自己的貢獻(不擴張到[bl, br - 1])，一次照上面的方法做，計算[bl, br - 1]的貢獻
 */
 #include<bits/stdc++.h>
 using namespace std;
