@@ -62,7 +62,7 @@ struct Dinic{
             if(level[t] == -1) break;
             memset(iter, 0, sizeof(iter));
             ll tmp = 0;
-            while((tmp = dfs(0, INF)) > 0){
+            while((tmp = dfs(s, INF)) > 0){
                 ret += tmp;
             }
         }
