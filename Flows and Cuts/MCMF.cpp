@@ -2,7 +2,9 @@
   * Created : 2023/09/10 
   * Min-Cost-Max-Flow
   * Description : uses SPFA to replace bfs in Dinic's algorithm to find the minimum cost path
-  * Since there are negative weight (cost) edges, we can't use dijkstra
+  *               Since there are negative weight (cost) edges, we can't use dijkstra
+  * Requirements : no negative cycle
+  * Time Complexity : O(nmf)?
 */
 #include<bits/stdc++.h>
 using namespace std;
