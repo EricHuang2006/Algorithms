@@ -4,7 +4,7 @@
   * Description : uses SPFA to replace bfs in Dinic's algorithm to find the minimum cost path
   *               Since there are negative weight (cost) edges, we can't use dijkstra
   * Requirements : no negative cycle
-  * Time Complexity : O(nmf)?
+  * Time Complexity : O(VEf) worst case, O(kEf) on random graph (k is the constant for running spfa)
 */
 #include<bits/stdc++.h>
 using namespace std;
