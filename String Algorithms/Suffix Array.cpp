@@ -39,7 +39,7 @@ struct SuffixArray{
 	void GetLCP(){ // Kasai's Algo 
 		int n = s.size(), val = 0;
 		for(int i = 0; i < n; i++) rk[sa[i]] = i;
-		for(int i = 0; i < n; i++){ // compute by ascending length of suffixes
+		for(int i = 0; i < n; i++){ // compute by descending length of suffixes
 			if(rk[i] == 0) val = 0;
 			else{
 				if(val) val--;
