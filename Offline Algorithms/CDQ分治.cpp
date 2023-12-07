@@ -1,104 +1,71 @@
+// find the number of indices j for every i such that x_j > x_i, y_j > y_i, z_j > z_i
 #include<bits/stdc++.h>
 using namespace std;
+typedef long long ll;
+typedef pair<ll, ll> pll;
+#define fastio ios::sync_with_stdio(false), cin.tie(0)
+#define pb push_back
+#define eb emplace_back
+#define f first
+#define s second
+#define lowbit(x) x&-x
+#define int long long
+const int INF = 1e9 + 7;
 const int maxn = 1e5 + 5;
-const int maxk = 2e5 + 5;
-int n, k;
+const int N = 1e9 + 7;
 
-struct element{
-	int x, y, z;
-	int cnt; // count the number of lesser nodes
-	int res;
-	
-	bool operator == (const element other){
-		return (x == other.x) && (y == other.y) && (z == other.z);	
-	}
-};
+struct pt{
+	int x, y, z, id;
+	pt(){}
+	pt(int _x, int _y, int _z) : x(_x), y(_y), z(_z){}
+} a[maxn];
 
-element arr[maxn];
-int res[maxn];
-
-struct Binary_Indexed_Tree{
-	int node[maxk];
-	int lowbit(int x){
-		return x & -x;
-	}
-	void add(int pos, int val){
-		while(pos <= k){
-			node[pos] += val;
-			pos += lowbit(pos);
-		}
-		return;
-	}
-	int qry(int pos){
-		int ret = 0;
-		while(pos){
-			ret += node[pos];
-			pos -= lowbit(pos);
-		}
-		return ret;
-	}
-} BIT;
-
-inline bool cmpx(element a, element b){
-	if(a.x != b.x) return a.x < b.x;
-	else if(a.y != b.y) return a.y < b.y;
-	return a.z < b.z;
+inline bool cmpx(pt a, pt b){
+	return a.x < b.x || (a.x == b.x && a.y > b.y);
 }
-
-inline bool cmpy(element a, element b){
-	if(a.y!= b.y) return a.y < b.y;
-	return a.z < b.z;
+int BIT[maxn];
+void upd(int pos, int val){
+	while(pos < maxn){
+		BIT[pos] += val;
+		pos += lowbit(pos);
+	}
 }
+int qry(int pos){
+	int ret = 0;
+	while(pos > 0){
+		ret += BIT[pos];
+		pos -= lowbit(pos);
+	}
+	return ret;
+}
+int ans[maxn];
 
-void CDQ(int l, int r){
-	if(l == r) return;
+void cdq(int l, int r){
+	if(l >= r) return;
 	int m = (l + r) / 2;
-	CDQ(l, m);
-	CDQ(m + 1, r);
-	vector<element> temp;
-	int i = l, j = m + 1;
-	while(j <= r){
-		while(i <= m && arr[i].y <= arr[j].y){
-			temp.push_back(arr[i]);
-			BIT.add(arr[i].z, arr[i].cnt);
-			i++;
-		}
-		arr[j].res += BIT.qry(arr[j].z);
-		temp.push_back(arr[j]);
-		j++;
+	cdq(l, m);
+	cdq(m + 1, r);
+	int id = l;
+	vector<pt> cpy;
+	for(int i = m + 1; i <= r; i++){
+		while(id <= m && a[id].y < a[i].y) upd(a[id].z, 1), cpy.pb(a[id]), id++;
+		ans[a[i].id] += qry(a[i].z - 1);
+		cpy.pb(a[i]); 
 	}
-	for(int k = l; k < i; k++){
-		BIT.add(arr[k].z, -arr[k].cnt);
-	}
-	while(i <= m) temp.push_back(arr[i++]);
-	while(j <= r) temp.push_back(arr[j++]);
-	for(int i = l, k = 0; i <= r; i++, k++) arr[i] = temp[k];
+	for(int i = id; i <= m; i++) cpy.pb(a[i]);
+	for(int i = l; i < id; i++) upd(a[i].z, -1);
+	for(int i = l; i <= r; i++) a[i] = cpy[i - l];
 }
-
-int main(void){
-	
-	cin>>n>>k;
-	int m = 0, t = 0;
+signed main(void){
+	fastio;
+	int n;
+	cin>>n;
 	for(int i = 0; i < n; i++){
-		cin>>arr[i].x>>arr[i].y>>arr[i].z;
+		cin>>a[i].x>>a[i].y>>a[i].z;
+		a[i].x = maxn - a[i].x, a[i].y = maxn - a[i].y, a[i].z = maxn - a[i].z;
+		a[i].id = i;
 	}
-	sort(arr, arr + n, cmpx);
-	for(int i = 0; i < n; i++){
-		t++;
-		if(!(arr[i] == arr[i + 1])){
-			arr[m].x = arr[i].x;
-			arr[m].y = arr[i].y;
-			arr[m].z = arr[i].z;
-			arr[m].cnt = t;
-			m++;
-			t = 0;
-		}
-	}
-	CDQ(0, m - 1);
-	for(int i = 0; i < m; i++){
-		res[arr[i].res + arr[i].cnt - 1] += arr[i].cnt;
-	}
-	for(int i = 0; i < n; i++){
-		cout<<res[i]<<endl;
-	}
+	sort(a, a + n, cmpx);
+	cdq(0, n - 1);
+	for(int i = 0; i < n; i++) cout<<ans[i]<<"\n";
 }
