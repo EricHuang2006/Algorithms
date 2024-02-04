@@ -2,7 +2,7 @@
     Created : 2023.2.4
     Description : Stoer-Wagner Algorithm 
                   finding the minimum cut of an undirected graph ( without source and sink )
-    Time Complexity : O(V^3) / O(VlogV) with fib heap
+    Time Complexity : O(V^3) / O(V^2logV) with fib heap
     Verification : P5632 【模板】Stoer-Wagner https://www.luogu.com.cn/problem/P5632
 */
 
