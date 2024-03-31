@@ -106,6 +106,21 @@ struct SuffixAutomaton{
 	    sort(oc.begin(), oc.end());
 	    return oc;
 	}
+	int lcs(string t){
+		int v = 0, l = 0, ans = 0;
+		for(auto x : t){
+			while(v && !nxt[v].count(x)){
+				v = link[v];
+				l = len[v];
+			}
+			if(nxt[v].count(x)){
+				v = nxt[v][x];
+				l++;
+			}
+			ans = max(ans, l);
+		}
+		return ans;
+	}
 };
 SuffixAutomaton automata;
 
