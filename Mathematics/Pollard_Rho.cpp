@@ -10,11 +10,11 @@ typedef pair<ll, ll> pll;
 #define fastio ios::sync_with_stdio(false), cin.tie(0)
 #define int long long
 
-ll f(int t, int c, int n){
+ll f(ll t, ll c, ll n){
 	return (t * t + c) % n;
 }
 
-ll Pollard_Rho(int x){
+ll Pollard_Rho(ll x){
 	ll t = 0;
 	ll c = rand() % (x - 1) + 1;
 	ll s = t;
