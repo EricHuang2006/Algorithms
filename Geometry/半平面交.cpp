@@ -73,13 +73,12 @@ void half_plane_intersection(vector<hp> p){
 	}
 	while(r - l > 1 && !same_side(t[l], s[r - 2])) r--;
 	s[r - 1] = its(t[l], t[r - 1]);
-	// r++;
 }
 
 signed main(){
     fastio;
-	int n;
-	cin>>n;
+    int n;
+    cin>>n;
     vector<hp> q;
     for(int i = 0; i < n; i++){
         int t;
