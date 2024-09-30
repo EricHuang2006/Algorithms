@@ -2,7 +2,8 @@
   Created : 2024.9.30
   Description : minimun spanning tree for a directed graph
   Complexity : O(nm), 要構解的話 O(n^2m) 
-  Qualification : P4716 【模板】最小树形图 (https://www.luogu.com.cn/problem/P4716)
+  Verification : P4716 【模板】最小树形图 (https://www.luogu.com.cn/problem/P4716)
+*/
 
 #include<bits/stdc++.h>
 using namespace std;
