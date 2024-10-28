@@ -1,7 +1,7 @@
 /*   
-    Updated : 2024.10.28
-    Description : Hungarian algorithm for maximum perfect bipartite matching in O(n^3)
-    Verification : Library Checker - Assignment Problem https://judge.yosupo.jp/problem/assignment
+    Created : 2024.10.28
+    Description : Hopcroft Karp : find the maximum matching of a bipartite graph in O(Vsqrt(E))
+    Verification : Library Checker - Matching on Bipartite Graph (https://judge.yosupo.jp/problem/bipartitematching)
 */
 
 int l, r, m;
